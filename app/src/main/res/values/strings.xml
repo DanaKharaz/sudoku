@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Sudoku</string>
+    <string name="undo">undo</string>
+    <string name="erase">erase</string>
+    <string name="pencil">pencil</string>
+    <string name="hint">hint</string>
 </resources>

@@ -1,16 +1,22 @@
 package com.example.sudoku;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.annotation.SuppressLint;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActivityPlay extends AppCompatActivity {
 
     Sudoku sudoku;
+    boolean[][] playable = new boolean[9][9];
 
     int mistakes = 0;
     TextView[] hearts = new TextView[3];
@@ -18,13 +24,27 @@ public class ActivityPlay extends AppCompatActivity {
     boolean marking = false; // true when pencil is clicked
     boolean[][][] marks = new boolean[9][9][9]; // x - row, y - col, z - number
 
-    Button btnUndo;
-    Button btnErase;
-    Button btnPencil;
-    Button btnHint;
-    Button[] numbers = new Button[9];
+    boolean cellSelected = false;
+    boolean erasing = false;
+    boolean hinting = false;
+
+    TextView btnUndo;
+    View layoutUndo;
+    TextView btnErase;
+    View layoutErase;
+    TextView txtErase;
+    TextView btnPencil;
+    View layoutPencil;
+    TextView txtPencil;
+    TextView btnHint;
+    View layoutHint;
+    TextView txtHint;
+
+    TextView[] numbers = new Button[9];
+    int[] numberCounts = new int[9];
     TextView[][] txtCells = new TextView[9][9];
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,14 +62,105 @@ public class ActivityPlay extends AppCompatActivity {
         setCells();
         int[][] grid = sudoku.getGrid();
         for (int i = 0; i < 9; i++) {
+            numberCounts[i] = 9; // default value
             for (int j = 0; j < 9; j++) {
+                txtCells[i][j].setClickable(true);
+
                 if (grid[i][j] != 0) {
+                    numberCounts[grid[i][j] - 1]--; // one less instance of this number left
+
                     txtCells[i][j].setText(String.valueOf(grid[i][j]));
+                } else {
+                    playable[i][j] = true;
+
+                    // change to rounded corners
+                    if (i <= 3 && (j <=3 || j >= 7) ||
+                            i >= 7 && (j <=3 || j >= 7) ||
+                            i >= 4 && i <= 6 && j >= 4 && j <= 6) {
+                        txtCells[i][j].setBackground(getDrawable(R.drawable.cell_play_purple));
+                    } else {
+                        txtCells[i][j].setBackground(getDrawable(R.drawable.cell_play_white));
+                    }
                 }
             }
         }
 
+        // set undo, erase, pencil, and hint buttons
+        btnUndo = findViewById(R.id.undo);
+        layoutUndo = findViewById(R.id.layoutUndo);
+        btnUndo.setOnClickListener(v -> {
+            /////////////
+        });
 
+        btnErase = findViewById(R.id.erase);
+        layoutErase = findViewById(R.id.layoutErase);
+        txtErase = findViewById(R.id.txtErase);
+        btnErase.setOnClickListener(v -> {
+            if (cellSelected) {
+                ///////
+            } else {
+                // adjust button position
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT
+                );
+                params.setMargins(0, 40, 0, 0);
+                if (erasing) {
+                    params.setMargins(0, 40, 0, 0); // now same as others
+                    txtErase.setTypeface(txtErase.getTypeface(), Typeface.NORMAL);
+                } else {
+                    params.setMargins(0, 10, 0, 0); // now same as others
+                    txtErase.setTypeface(txtErase.getTypeface(), Typeface.BOLD);
+                }
+                erasing = !erasing;
+            }
+        });
+
+        btnPencil = findViewById(R.id.pencil);
+        layoutPencil = findViewById(R.id.layoutPencil);
+        txtPencil = findViewById(R.id.txtPencil);
+        btnPencil.setOnClickListener(v -> {
+            // adjust button position
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(0, 40, 0, 0);
+            if (marking) {
+                params.setMargins(0, 40, 0, 0); // now same as others
+                txtPencil.setTypeface(txtPencil.getTypeface(), Typeface.NORMAL);
+            } else {
+                params.setMargins(0, 10, 0, 0); // now above as others
+                txtPencil.setTypeface(txtPencil.getTypeface(), Typeface.BOLD);
+            }
+            marking = !marking;
+
+            /////////////
+        });
+
+        btnHint = findViewById(R.id.hint);
+        layoutHint = findViewById(R.id.layoutHint);
+        txtHint = findViewById(R.id.txtHint);
+        btnHint.setOnClickListener(v -> {
+            if (cellSelected) {
+                ///////
+            } else {
+                // adjust button position
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT
+                );
+                params.setMargins(0, 40, 0, 0);
+                if (hinting) {
+                    params.setMargins(0, 40, 0, 0); // now same as others
+                    txtHint.setTypeface(txtHint.getTypeface(), Typeface.NORMAL);
+                } else {
+                    params.setMargins(0, 10, 0, 0); // now same as others
+                    txtHint.setTypeface(txtHint.getTypeface(), Typeface.BOLD);
+                }
+                hinting = !hinting;
+            }
+        });
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
