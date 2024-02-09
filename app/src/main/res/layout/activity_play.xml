@@ -1,0 +1,937 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityPlay"
+    android:background="@color/purple_mid">
+
+    <TextView
+        android:id="@+id/heart1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_heart_alive"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/heart2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/heart2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_heart_alive"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/heart3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_heart_alive"
+        app:layout_constraintStart_toEndOf="@+id/heart2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/block1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/block2"
+        app:layout_constraintTop_toBottomOf="@+id/heart2">
+
+        <TextView
+            android:id="@+id/cell11"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell21"
+            app:layout_constraintEnd_toStartOf="@+id/cell12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell12"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell22"
+            app:layout_constraintEnd_toStartOf="@+id/cell13"
+            app:layout_constraintStart_toEndOf="@+id/cell11"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell13"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell23"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell12"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell21"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell31"
+            app:layout_constraintEnd_toStartOf="@+id/cell22"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell11" />
+
+        <TextView
+            android:id="@+id/cell22"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell32"
+            app:layout_constraintEnd_toStartOf="@+id/cell23"
+            app:layout_constraintStart_toEndOf="@+id/cell21"
+            app:layout_constraintTop_toBottomOf="@+id/cell12" />
+
+        <TextView
+            android:id="@+id/cell23"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell33"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell22"
+            app:layout_constraintTop_toBottomOf="@+id/cell13" />
+
+        <TextView
+            android:id="@+id/cell31"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell32"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell21" />
+
+        <TextView
+            android:id="@+id/cell32"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell33"
+            app:layout_constraintStart_toEndOf="@+id/cell31"
+            app:layout_constraintTop_toBottomOf="@+id/cell22" />
+
+        <TextView
+            android:id="@+id/cell33"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell32"
+            app:layout_constraintTop_toBottomOf="@+id/cell23" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/block2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heart2">
+
+        <TextView
+            android:id="@+id/cell14"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell24"
+            app:layout_constraintEnd_toStartOf="@+id/cell15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell15"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell25"
+            app:layout_constraintEnd_toStartOf="@+id/cell16"
+            app:layout_constraintStart_toEndOf="@+id/cell14"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell16"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell26"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell15"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell24"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell34"
+            app:layout_constraintEnd_toStartOf="@+id/cell25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell14" />
+
+        <TextView
+            android:id="@+id/cell25"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell35"
+            app:layout_constraintEnd_toStartOf="@+id/cell26"
+            app:layout_constraintStart_toEndOf="@+id/cell24"
+            app:layout_constraintTop_toBottomOf="@+id/cell15" />
+
+        <TextView
+            android:id="@+id/cell26"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell36"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell25"
+            app:layout_constraintTop_toBottomOf="@+id/cell14" />
+
+        <TextView
+            android:id="@+id/cell34"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell35"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell24" />
+
+        <TextView
+            android:id="@+id/cell35"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell36"
+            app:layout_constraintStart_toEndOf="@+id/cell34"
+            app:layout_constraintTop_toBottomOf="@+id/cell25" />
+
+        <TextView
+            android:id="@+id/cell36"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell35"
+            app:layout_constraintTop_toBottomOf="@+id/cell26" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/block3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toEndOf="@+id/block2"
+        app:layout_constraintTop_toBottomOf="@+id/heart2">
+
+        <TextView
+            android:id="@+id/cell17"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell27"
+            app:layout_constraintEnd_toStartOf="@+id/cell18"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell18"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell28"
+            app:layout_constraintEnd_toStartOf="@+id/cell19"
+            app:layout_constraintStart_toEndOf="@+id/cell17"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell19"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell29"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell18"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell27"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell37"
+            app:layout_constraintEnd_toStartOf="@+id/cell28"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell17" />
+
+        <TextView
+            android:id="@+id/cell28"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell38"
+            app:layout_constraintEnd_toStartOf="@+id/cell29"
+            app:layout_constraintStart_toEndOf="@+id/cell27"
+            app:layout_constraintTop_toBottomOf="@+id/cell18" />
+
+        <TextView
+            android:id="@+id/cell29"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell39"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell28"
+            app:layout_constraintTop_toBottomOf="@+id/cell19" />
+
+        <TextView
+            android:id="@+id/cell37"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell38"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell27" />
+
+        <TextView
+            android:id="@+id/cell38"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell39"
+            app:layout_constraintStart_toEndOf="@+id/cell37"
+            app:layout_constraintTop_toBottomOf="@+id/cell28" />
+
+        <TextView
+            android:id="@+id/cell39"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell38"
+            app:layout_constraintTop_toBottomOf="@+id/cell29" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/block4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/block5"
+        app:layout_constraintTop_toBottomOf="@+id/block1">
+
+        <TextView
+            android:id="@+id/cell41"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell51"
+            app:layout_constraintEnd_toStartOf="@+id/cell42"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell42"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell52"
+            app:layout_constraintEnd_toStartOf="@+id/cell43"
+            app:layout_constraintStart_toEndOf="@+id/cell41"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell43"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell53"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell42"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell51"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell61"
+            app:layout_constraintEnd_toStartOf="@+id/cell52"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell41" />
+
+        <TextView
+            android:id="@+id/cell52"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell62"
+            app:layout_constraintEnd_toStartOf="@+id/cell53"
+            app:layout_constraintStart_toEndOf="@+id/cell51"
+            app:layout_constraintTop_toBottomOf="@+id/cell42" />
+
+        <TextView
+            android:id="@+id/cell53"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell63"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell52"
+            app:layout_constraintTop_toBottomOf="@+id/cell43" />
+
+        <TextView
+            android:id="@+id/cell61"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell62"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell51" />
+
+        <TextView
+            android:id="@+id/cell62"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell63"
+            app:layout_constraintStart_toEndOf="@+id/cell61"
+            app:layout_constraintTop_toBottomOf="@+id/cell52" />
+
+        <TextView
+            android:id="@+id/cell63"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell62"
+            app:layout_constraintTop_toBottomOf="@+id/cell53" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/block5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/block2">
+
+        <TextView
+            android:id="@+id/cell44"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell54"
+            app:layout_constraintEnd_toStartOf="@+id/cell45"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell45"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell55"
+            app:layout_constraintEnd_toStartOf="@+id/cell46"
+            app:layout_constraintStart_toEndOf="@+id/cell44"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell46"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell56"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell45"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell54"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell64"
+            app:layout_constraintEnd_toStartOf="@+id/cell55"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell44" />
+
+        <TextView
+            android:id="@+id/cell55"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell65"
+            app:layout_constraintEnd_toStartOf="@+id/cell56"
+            app:layout_constraintStart_toEndOf="@+id/cell54"
+            app:layout_constraintTop_toBottomOf="@+id/cell45" />
+
+        <TextView
+            android:id="@+id/cell56"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell66"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell55"
+            app:layout_constraintTop_toBottomOf="@+id/cell44" />
+
+        <TextView
+            android:id="@+id/cell64"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell65"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell54" />
+
+        <TextView
+            android:id="@+id/cell65"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell66"
+            app:layout_constraintStart_toEndOf="@+id/cell64"
+            app:layout_constraintTop_toBottomOf="@+id/cell55" />
+
+        <TextView
+            android:id="@+id/cell66"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell65"
+            app:layout_constraintTop_toBottomOf="@+id/cell56" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/block6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/block5"
+        app:layout_constraintTop_toBottomOf="@+id/block3">
+
+        <TextView
+            android:id="@+id/cell47"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell57"
+            app:layout_constraintEnd_toStartOf="@+id/cell48"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell48"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell58"
+            app:layout_constraintEnd_toStartOf="@+id/cell49"
+            app:layout_constraintStart_toEndOf="@+id/cell47"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell49"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell59"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell48"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell57"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell67"
+            app:layout_constraintEnd_toStartOf="@+id/cell58"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell47" />
+
+        <TextView
+            android:id="@+id/cell58"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell68"
+            app:layout_constraintEnd_toStartOf="@+id/cell59"
+            app:layout_constraintStart_toEndOf="@+id/cell57"
+            app:layout_constraintTop_toBottomOf="@+id/cell48" />
+
+        <TextView
+            android:id="@+id/cell59"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell69"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell58"
+            app:layout_constraintTop_toBottomOf="@+id/cell49" />
+
+        <TextView
+            android:id="@+id/cell67"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell68"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell57" />
+
+        <TextView
+            android:id="@+id/cell68"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell69"
+            app:layout_constraintStart_toEndOf="@+id/cell67"
+            app:layout_constraintTop_toBottomOf="@+id/cell58" />
+
+        <TextView
+            android:id="@+id/cell69"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell68"
+            app:layout_constraintTop_toBottomOf="@+id/cell59" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/block7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/block8"
+        app:layout_constraintTop_toBottomOf="@+id/block4">
+
+        <TextView
+            android:id="@+id/cell71"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell81"
+            app:layout_constraintEnd_toStartOf="@+id/cell72"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell72"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell82"
+            app:layout_constraintEnd_toStartOf="@+id/cell73"
+            app:layout_constraintStart_toEndOf="@+id/cell71"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell73"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell83"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell72"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell81"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell91"
+            app:layout_constraintEnd_toStartOf="@+id/cell82"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell71" />
+
+        <TextView
+            android:id="@+id/cell82"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell92"
+            app:layout_constraintEnd_toStartOf="@+id/cell83"
+            app:layout_constraintStart_toEndOf="@+id/cell81"
+            app:layout_constraintTop_toBottomOf="@+id/cell72" />
+
+        <TextView
+            android:id="@+id/cell83"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell93"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell82"
+            app:layout_constraintTop_toBottomOf="@+id/cell73" />
+
+        <TextView
+            android:id="@+id/cell91"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell92"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell81" />
+
+        <TextView
+            android:id="@+id/cell92"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell93"
+            app:layout_constraintStart_toEndOf="@+id/cell91"
+            app:layout_constraintTop_toBottomOf="@+id/cell82" />
+
+        <TextView
+            android:id="@+id/cell93"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell92"
+            app:layout_constraintTop_toBottomOf="@+id/cell83" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/block8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/block5">
+
+        <TextView
+            android:id="@+id/cell74"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell84"
+            app:layout_constraintEnd_toStartOf="@+id/cell75"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell75"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell85"
+            app:layout_constraintEnd_toStartOf="@+id/cell76"
+            app:layout_constraintStart_toEndOf="@+id/cell74"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell76"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell86"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell75"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell84"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell94"
+            app:layout_constraintEnd_toStartOf="@+id/cell85"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell74" />
+
+        <TextView
+            android:id="@+id/cell85"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell95"
+            app:layout_constraintEnd_toStartOf="@+id/cell86"
+            app:layout_constraintStart_toEndOf="@+id/cell84"
+            app:layout_constraintTop_toBottomOf="@+id/cell75" />
+
+        <TextView
+            android:id="@+id/cell86"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toTopOf="@+id/cell96"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell85"
+            app:layout_constraintTop_toBottomOf="@+id/cell74" />
+
+        <TextView
+            android:id="@+id/cell94"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell95"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell84" />
+
+        <TextView
+            android:id="@+id/cell95"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell96"
+            app:layout_constraintStart_toEndOf="@+id/cell94"
+            app:layout_constraintTop_toBottomOf="@+id/cell85" />
+
+        <TextView
+            android:id="@+id/cell96"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell95"
+            app:layout_constraintTop_toBottomOf="@+id/cell86" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/block9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/block8"
+        app:layout_constraintTop_toBottomOf="@+id/block6">
+
+        <TextView
+            android:id="@+id/cell77"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell87"
+            app:layout_constraintEnd_toStartOf="@+id/cell78"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell78"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell88"
+            app:layout_constraintEnd_toStartOf="@+id/cell79"
+            app:layout_constraintStart_toEndOf="@+id/cell77"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell79"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell89"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell78"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cell87"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell97"
+            app:layout_constraintEnd_toStartOf="@+id/cell88"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell77" />
+
+        <TextView
+            android:id="@+id/cell88"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell98"
+            app:layout_constraintEnd_toStartOf="@+id/cell89"
+            app:layout_constraintStart_toEndOf="@+id/cell87"
+            app:layout_constraintTop_toBottomOf="@+id/cell78" />
+
+        <TextView
+            android:id="@+id/cell89"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toTopOf="@+id/cell99"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell88"
+            app:layout_constraintTop_toBottomOf="@+id/cell79" />
+
+        <TextView
+            android:id="@+id/cell97"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell98"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cell87" />
+
+        <TextView
+            android:id="@+id/cell98"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cell99"
+            app:layout_constraintStart_toEndOf="@+id/cell97"
+            app:layout_constraintTop_toBottomOf="@+id/cell88" />
+
+        <TextView
+            android:id="@+id/cell99"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/cell_set_purple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cell98"
+            app:layout_constraintTop_toBottomOf="@+id/cell89" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
