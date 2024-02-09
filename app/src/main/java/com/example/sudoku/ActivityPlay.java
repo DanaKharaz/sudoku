@@ -2,10 +2,14 @@ package com.example.sudoku;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.annotation.SuppressLint;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -40,11 +44,11 @@ public class ActivityPlay extends AppCompatActivity {
     View layoutHint;
     TextView txtHint;
 
-    TextView[] numbers = new Button[9];
+    TextView[] numbers = new TextView[9];
     int[] numberCounts = new int[9];
     TextView[][] txtCells = new TextView[9][9];
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint({"UseCompatLoadingForDrawables", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,16 +59,25 @@ public class ActivityPlay extends AppCompatActivity {
 
         // set hearts
         hearts[0] = findViewById(R.id.heart1);
-        hearts[2] = findViewById(R.id.heart2);
-        hearts[3] = findViewById(R.id.heart3);
+        hearts[1] = findViewById(R.id.heart2);
+        hearts[2] = findViewById(R.id.heart3);
 
         // set the grid
         setCells();
-        int[][] grid = sudoku.getGrid();
+        //int[][] grid = sudoku.getGrid(); // UI TESTS !!!
+        int [][] grid = new int[9][9];
+        grid[5][7] = 9;
+
         for (int i = 0; i < 9; i++) {
             numberCounts[i] = 9; // default value
             for (int j = 0; j < 9; j++) {
                 txtCells[i][j].setClickable(true);
+
+                // text params
+                txtCells[i][j].setGravity(Gravity.CENTER);
+                txtCells[i][j].setTypeface(Typeface.MONOSPACE);
+                txtCells[i][j].setTextSize(30);
+                txtCells[i][j].setTextColor(getColor(R.color.purple_dark));
 
                 if (grid[i][j] != 0) {
                     numberCounts[grid[i][j] - 1]--; // one less instance of this number left
@@ -74,15 +87,32 @@ public class ActivityPlay extends AppCompatActivity {
                     playable[i][j] = true;
 
                     // change to rounded corners
-                    if (i <= 3 && (j <=3 || j >= 7) ||
-                            i >= 7 && (j <=3 || j >= 7) ||
-                            i >= 4 && i <= 6 && j >= 4 && j <= 6) {
+                    if (i < 3 && (j < 3 || j > 5) ||
+                            i > 5 && (j < 3 || j > 5) ||
+                            i > 2 && i < 6 && j > 2 && j < 6) {
                         txtCells[i][j].setBackground(getDrawable(R.drawable.cell_play_purple));
                     } else {
                         txtCells[i][j].setBackground(getDrawable(R.drawable.cell_play_white));
                     }
                 }
             }
+        }
+
+        // set number buttons
+        numbers[0] = findViewById(R.id.number1);
+        numbers[1] = findViewById(R.id.number2);
+        numbers[2] = findViewById(R.id.number3);
+        numbers[3] = findViewById(R.id.number4);
+        numbers[4] = findViewById(R.id.number5);
+        numbers[5] = findViewById(R.id.number6);
+        numbers[6] = findViewById(R.id.number7);
+        numbers[7] = findViewById(R.id.number8);
+        numbers[8] = findViewById(R.id.number9);
+        for (int i = 0; i < 9; i++) {
+            numbers[i].setText(styleBtnText(i + 1, numberCounts[i]));
+            numbers[i].setOnClickListener(v -> {
+                /////////
+            });
         }
 
         // set undo, erase, pencil, and hint buttons
@@ -100,19 +130,15 @@ public class ActivityPlay extends AppCompatActivity {
                 ///////
             } else {
                 // adjust button position
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                        RelativeLayout.LayoutParams.WRAP_CONTENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT
-                );
-                params.setMargins(0, 40, 0, 0);
+                ViewGroup.MarginLayoutParams paramsUndo = (ViewGroup.MarginLayoutParams) layoutUndo.getLayoutParams();
+                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) layoutErase.getLayoutParams();
                 if (erasing) {
-                    params.setMargins(0, 40, 0, 0); // now same as others
-                    txtErase.setTypeface(txtErase.getTypeface(), Typeface.NORMAL);
+                    params.topMargin = paramsUndo.topMargin; // now same as others
                 } else {
-                    params.setMargins(0, 10, 0, 0); // now same as others
-                    txtErase.setTypeface(txtErase.getTypeface(), Typeface.BOLD);
+                    params.topMargin = 40; // now above others
                 }
                 erasing = !erasing;
+                layoutErase.setLayoutParams(params);
             }
         });
 
@@ -121,19 +147,15 @@ public class ActivityPlay extends AppCompatActivity {
         txtPencil = findViewById(R.id.txtPencil);
         btnPencil.setOnClickListener(v -> {
             // adjust button position
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT,
-                    RelativeLayout.LayoutParams.WRAP_CONTENT
-            );
-            params.setMargins(0, 40, 0, 0);
+            ViewGroup.MarginLayoutParams paramsUndo = (ViewGroup.MarginLayoutParams) layoutUndo.getLayoutParams();
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) layoutPencil.getLayoutParams();
             if (marking) {
-                params.setMargins(0, 40, 0, 0); // now same as others
-                txtPencil.setTypeface(txtPencil.getTypeface(), Typeface.NORMAL);
+                params.topMargin = paramsUndo.topMargin; // now same as others
             } else {
-                params.setMargins(0, 10, 0, 0); // now above as others
-                txtPencil.setTypeface(txtPencil.getTypeface(), Typeface.BOLD);
+                params.topMargin = 40; // now above others
             }
             marking = !marking;
+            layoutPencil.setLayoutParams(params);
 
             /////////////
         });
@@ -146,21 +168,26 @@ public class ActivityPlay extends AppCompatActivity {
                 ///////
             } else {
                 // adjust button position
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                        RelativeLayout.LayoutParams.WRAP_CONTENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT
-                );
-                params.setMargins(0, 40, 0, 0);
+                ViewGroup.MarginLayoutParams paramsUndo = (ViewGroup.MarginLayoutParams) layoutUndo.getLayoutParams();
+                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) layoutHint.getLayoutParams();
                 if (hinting) {
-                    params.setMargins(0, 40, 0, 0); // now same as others
-                    txtHint.setTypeface(txtHint.getTypeface(), Typeface.NORMAL);
+                    params.topMargin = paramsUndo.topMargin; // now same as others
                 } else {
-                    params.setMargins(0, 10, 0, 0); // now same as others
-                    txtHint.setTypeface(txtHint.getTypeface(), Typeface.BOLD);
+                    params.topMargin = 40; // now above others
                 }
                 hinting = !hinting;
+                layoutHint.setLayoutParams(params);
             }
         });
+    }
+
+    public Spanned styleBtnText(int num, int count) {
+        String html = "<h1><big><font color='#4F1964'>" +
+                String.valueOf(num) +
+                "</font></big><br/><small><font color='#4F1964'>" +
+                String.valueOf(count) +
+                "</font></small></h1>";
+        return((Html.fromHtml(html, 0)));
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -191,7 +218,7 @@ public class ActivityPlay extends AppCompatActivity {
         txtCells[1][2] = findViewById(R.id.cell23);
         txtCells[2][0] = findViewById(R.id.cell31);
         txtCells[2][1] = findViewById(R.id.cell32);
-        txtCells[2][2] = findViewById(R.id.cell32);
+        txtCells[2][2] = findViewById(R.id.cell33);
         // block 2
         txtCells[0][3] = findViewById(R.id.cell14);
         txtCells[0][4] = findViewById(R.id.cell15);
@@ -251,7 +278,7 @@ public class ActivityPlay extends AppCompatActivity {
         txtCells[7][2] = findViewById(R.id.cell83);
         txtCells[8][0] = findViewById(R.id.cell91);
         txtCells[8][1] = findViewById(R.id.cell92);
-        txtCells[8][2] = findViewById(R.id.cell92);
+        txtCells[8][2] = findViewById(R.id.cell93);
         // block 8
         txtCells[6][3] = findViewById(R.id.cell74);
         txtCells[6][4] = findViewById(R.id.cell75);
