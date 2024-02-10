@@ -54,8 +54,6 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/cell_set_purple"
-            android:textAlignment="center"
-            android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/cell21"
             app:layout_constraintEnd_toStartOf="@+id/cell12"
             app:layout_constraintStart_toStartOf="parent"
