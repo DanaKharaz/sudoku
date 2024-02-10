@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 import android.util.Pair;
 import android.view.Gravity;
 import android.view.View;
@@ -72,9 +73,15 @@ public class ActivityPlay extends AppCompatActivity {
         setCells();
         //int[][] grid = sudoku.getGrid(); // UI TESTS !!!
         int [][] grid = new int[9][9];
-        grid[5][7] = 9;
-        grid[4][8] = 9;
-        grid[0][0] = 1;
+        grid[2][0] = 1;
+        grid[4][1] = 1;
+        grid[7][2] = 1;
+        grid[5][3] = 1;
+        grid[1][4] = 1;
+        grid[6][5] = 1;
+        grid[0][6] = 1;
+        grid[8][7] = 1;
+        grid[3][8] = 1;
         sudoku = new Sudoku(grid);
 
         for (int i = 0; i < 9; i++) {
@@ -173,38 +180,41 @@ public class ActivityPlay extends AppCompatActivity {
         numberBtnTopMargin = ((ViewGroup.MarginLayoutParams) btnNumbers[0].getLayoutParams()).topMargin;
         // stylize buttons and set onClick
         for (int k = 0; k < 9; k++) {
-            btnNumbers[k].setText(styleBtnText(k + 1, numberCounts[k]));
+            btnNumbers[k].setText(styleBtnText(k + 1, numberCounts[k])); // text: number, how many instances of it are left
+
+            // change background for already 'completed' numbers (no more instances left)
+            if (numberCounts[k] == 0) {
+                btnNumbers[k].setBackground(getDrawable(R.drawable.num_purple));
+            }
+
             final int finalK = k;
             btnNumbers[k].setOnClickListener(v -> {
-                // TODO
-                if (marking) {
+                if (numberCounts[finalK] == 0) { // cannot write or mark this number as it is 'completed'
+                    Toast.makeText(this, "All positions with this number have been filled already", Toast.LENGTH_SHORT).show();
+                } else if (marking) {
                     // TODO
-                } else { // TODO
+                } else if (cellSelected) {
+                    // TODO
+                } else { // choosing or un-choosing a number to write in cells
                     // fix alignment of other numbers
-
-                    selectedNumber = finalK + 1;
+                    if (selectedNumber == finalK + 1) { // un-choosing this number
+                        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) btnNumbers[finalK].getLayoutParams();
+                        params.topMargin = numberBtnTopMargin;
+                        btnNumbers[finalK].setLayoutParams(params);
+                        selectedNumber = 0;
+                    } else {
+                        for (int i = 0; i < 9; i++) {
+                            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) btnNumbers[i].getLayoutParams();
+                            if (i == finalK) {
+                                params.topMargin = 20;
+                            } else {
+                                params.topMargin = numberBtnTopMargin;
+                            }
+                            btnNumbers[i].setLayoutParams(params);
+                        }
+                        selectedNumber = finalK + 1;
+                    }
                 }
-                /*
-                // adjust button position
-                ViewGroup.MarginLayoutParams paramsUndo = (ViewGroup.MarginLayoutParams) layoutUndo.getLayoutParams();
-                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) layoutErase.getLayoutParams();
-                if (erasing) {
-                    params.topMargin = paramsUndo.topMargin; // now same as others
-                } else {
-                    params.topMargin = 40; // now above others
-
-                    // 'un-click' the rest
-                    if (marking) {
-                        ViewGroup.MarginLayoutParams paramsPencil = (ViewGroup.MarginLayoutParams) layoutPencil.getLayoutParams();
-                        paramsPencil.topMargin = paramsUndo.topMargin;
-                        layoutPencil.setLayoutParams(paramsPencil);
-                        marking = false;
-                    } else if (hinting) {
-                        ViewGroup.MarginLayoutParams paramsHint = (ViewGroup.MarginLayoutParams) layoutHint.getLayoutParams();
-                        paramsHint.topMargin = paramsUndo.topMargin;
-                        layoutHint.setLayoutParams(paramsHint);}}*/
-
-
             });
         }
 
@@ -364,11 +374,12 @@ public class ActivityPlay extends AppCompatActivity {
 
         if (playable[row][col]) {
             // TODO
+            Toast.makeText(this, "voila", Toast.LENGTH_SHORT).show();
         } else {
             // highlight same number
             int n = sudoku.getGrid()[row][col] - 1;
             int index = 0;
-            while (numberPositions[n][index] != 0) {
+            while (index < 9 && numberPositions[n][index] != 0) {
                 int i = (numberPositions[n][index] - 1)/10;
                 int j = (numberPositions[n][index] - 1)%10;
                 btnCells[i][j].setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
