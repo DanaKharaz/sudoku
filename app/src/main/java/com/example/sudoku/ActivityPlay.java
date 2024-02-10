@@ -5,7 +5,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
-import android.util.Log;
 import android.util.Pair;
 import android.view.Gravity;
 import android.view.View;
