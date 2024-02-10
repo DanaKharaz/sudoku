@@ -6,11 +6,15 @@ import java.util.Objects;
 import java.util.Random;
 
 public class Sudoku {
+    // DocMe : general
+
     // vars
     private int[][] grid;
 
     // constructors
     public Sudoku(int known) {
+        // DocMe
+
         grid = new int[9][9];
         boolean[][] taken = new boolean[9][9]; // all false by default
         int i = 0;
@@ -39,6 +43,8 @@ public class Sudoku {
         }
     }
     public Sudoku(int[][] grid) {
+        // DocMe
+
         this.grid = grid;
     }
 
@@ -48,6 +54,8 @@ public class Sudoku {
     public void putValue(int row, int col, int val) {grid[row][col] = val;}
     public void removeValue(int row, int col) {grid[row][col] = 0;}
     public boolean isIllegal(int row, int col, int val) {
+        // DocMe
+
         boolean res = true; // legal by default
 
         // check row and column
@@ -73,6 +81,8 @@ public class Sudoku {
         return !res;
     }
     private Pair<Integer, Integer> findAvailable() {
+        // DocMe
+
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 // empty cell found
@@ -82,6 +92,8 @@ public class Sudoku {
         return null;
     }
     public int[][] solve() {
+        // DocMe
+
         Pair<Integer, Integer> available = findAvailable();
 
         // solution found - all cells filled
@@ -99,4 +111,6 @@ public class Sudoku {
         }
         return grid;
     }
+
+    public Sudoku copy() {return new Sudoku(grid);}
 }

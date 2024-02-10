@@ -14,12 +14,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Objects;
 import java.util.Stack;
 
 public class ActivityPlay extends AppCompatActivity {
+    // DocMe : general activity
 
     // TODO: add timer
 
+
+    // FIXME : organize variables and clearly annotate
     Sudoku sudoku;
     boolean[][] playable = new boolean[9][9];
     int[][] numberPositions = new int[9][9]; // positions of each number formatted as (10*row + col + 1)
@@ -30,7 +34,7 @@ public class ActivityPlay extends AppCompatActivity {
     boolean marking = false; // true when pencil is clicked
     boolean[][][] marks = new boolean[9][9][9]; // x - row, y - col, z - number
 
-    boolean cellSelected = false;
+    int cellSelected = 0; // formatted as (10*row + col + 1), 0 when not selected
     boolean erasing = false;
     boolean hinting = false;
     int selectedNumber = 0; // 0 when no number is selected
@@ -43,6 +47,7 @@ public class ActivityPlay extends AppCompatActivity {
     View layoutPencil;
     TextView btnHint;
     View layoutHint;
+    int hintsLeft = 0;
 
     TextView[] btnNumbers = new TextView[9];
     int[] numberCounts = {9, 9, 9, 9, 9, 9, 9, 9, 9};
@@ -62,6 +67,7 @@ public class ActivityPlay extends AppCompatActivity {
         // TODO:
         // create new Sudoku object if making a puzzle
         // retrieve needed Sudoku object if solving a puzzle
+        // set number of hints
 
         // set hearts
         hearts[0] = findViewById(R.id.heart1);
@@ -83,6 +89,7 @@ public class ActivityPlay extends AppCompatActivity {
         grid[3][8] = 1;
         sudoku = new Sudoku(grid);
 
+        // DocMe
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 btnCells[i][j].setClickable(true);
@@ -104,14 +111,17 @@ public class ActivityPlay extends AppCompatActivity {
                     int finalI = i;
                     int finalJ = j;
                     btnCells[i][j].setOnClickListener(v -> {
+                        // DocMe
+
                         if (marking) {
                             Toast.makeText(this, "Cannot use pencil on pre-filled cell", Toast.LENGTH_SHORT).show();
                         } else if (hinting) {
                             Toast.makeText(this, "Cannot use hint on pre-filled cell", Toast.LENGTH_SHORT).show();
                         } else if (erasing) {
                             Toast.makeText(this, "Cannot erase pre-filled cell", Toast.LENGTH_SHORT).show();
-                        } else {
-                            selectCell(finalI, finalJ); // highlight needed cells
+                        } else { // highlights needed cells
+                            selectCell(finalI, finalJ);
+                            // TODO : put down all number buttons
                         }
                     });
                 } else {
@@ -130,15 +140,34 @@ public class ActivityPlay extends AppCompatActivity {
                     int finalI = i;
                     int finalJ = j;
                     btnCells[i][j].setOnClickListener(v -> {
-                        if (marking) {
-                            // TODO
-                        } else if (hinting) {
-                            // TODO
+                        // DocMe
+
+                        if (hinting) { // TestMe
+                            if (hintsLeft == 0) {
+                                Toast.makeText(this, "No hints left", Toast.LENGTH_SHORT).show();
+                            } else {
+                                if (playable[finalI][finalJ]) {
+                                    Sudoku temp = sudoku.copy();
+                                    int[][] sol = temp.solve();
+                                    if (!Objects.isNull(sol)) { // no solution currently
+                                        Toast.makeText(this, "In the current state, the puzzle appears to be unsolvable, try to change values and use the hint again", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        int n = temp.getGrid()[finalI][finalJ];
+                                        sudoku.putValue(finalI, finalJ, n);
+                                        hintsLeft--;
+                                        // fix UI
+                                        btnCells[finalI][finalJ].setText(String.valueOf(n));
+                                        btnCells[finalI][finalJ].setTypeface(Typeface.MONOSPACE, Typeface.NORMAL);
+                                    }
+                                } else {
+                                    Toast.makeText(this, "This is a pre-filled cell, please choose another one", Toast.LENGTH_SHORT).show();
+                                }
+                            }
                         } else if (erasing) {
                             int n = sudoku.getGrid()[finalI][finalJ];
                             if (n == 0) {
                                 Toast.makeText(this, "Nothing to erase", Toast.LENGTH_SHORT).show();
-                            } else { // TODO: test
+                            } else { // TestMe
                                 sudoku.removeValue(finalI, finalJ); // fix grid
                                 for (int k = 0; k < 9; k++) { // fix numberPositions
                                     if (numberPositions[n - 1][k] == 0) {
@@ -155,9 +184,11 @@ public class ActivityPlay extends AppCompatActivity {
                                         break;
                                     }
                                 }
-                                btnCells[finalI][finalJ].setText(""); // fix UI
+                                // fix UI
+                                btnCells[finalI][finalJ].setText("");
+                                btnCells[finalI][finalJ].setTypeface(Typeface.MONOSPACE, Typeface.NORMAL);
                             }
-                        } else {
+                        } else { // when marking or writing a number
                             selectCell(finalI, finalJ); // highlight needed cells
                         }
                     });
@@ -186,14 +217,28 @@ public class ActivityPlay extends AppCompatActivity {
                 btnNumbers[k].setBackground(getDrawable(R.drawable.num_purple));
             }
 
-            final int finalK = k;
+            int finalK = k;
             btnNumbers[k].setOnClickListener(v -> {
+                // DocMe
+
                 if (numberCounts[finalK] == 0) { // cannot write or mark this number as it is 'completed'
                     Toast.makeText(this, "All positions with this number have been filled already", Toast.LENGTH_SHORT).show();
-                } else if (marking) {
-                    // TODO
-                } else if (cellSelected) {
-                    // TODO
+                } else if (marking && cellSelected != 0) {
+                    // TODO : add or remove the number from selected cell
+                    // cell selected, so add/remove the mark,
+                } else if (cellSelected != 0) {
+                    // TODO : write the number from in the selected cell
+                    int i = (cellSelected - 1)/10;
+                    int j = (cellSelected - 1)%10;
+                    if (sudoku.isIllegal(i, j, finalK + 1)) {
+                        // TODO : wrong, so fix UI and don't change numberCounts
+                    } else { // TestMe
+                        sudoku.putValue(i, j, finalK + 1);
+                        numberCounts[finalK]--;
+
+                        btnCells[i][j].setText(String.valueOf(finalK + 1));
+                        btnCells[i][j].setTypeface(Typeface.MONOSPACE, Typeface.NORMAL);
+                    }
                 } else { // choosing or un-choosing a number to write in cells
                     // fix alignment of other numbers
                     if (selectedNumber == finalK + 1) { // un-choosing this number
@@ -201,6 +246,7 @@ public class ActivityPlay extends AppCompatActivity {
                         params.topMargin = numberBtnTopMargin;
                         btnNumbers[finalK].setLayoutParams(params);
                         selectedNumber = 0;
+                        // TODO : reset all text to normal
                     } else {
                         for (int i = 0; i < 9; i++) {
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) btnNumbers[i].getLayoutParams();
@@ -212,11 +258,13 @@ public class ActivityPlay extends AppCompatActivity {
                             btnNumbers[i].setLayoutParams(params);
                         }
                         selectedNumber = finalK + 1;
+                        // TODO : make selected number bold
                     }
                 }
             });
         }
 
+        // DocMe
         // set undo, erase, pencil, and hint buttons
         btnUndo = findViewById(R.id.undo);
         layoutUndo = findViewById(R.id.layoutUndo);
@@ -243,7 +291,7 @@ public class ActivityPlay extends AppCompatActivity {
 
             if (moveHistory.size() == 0) {
                 Toast.makeText(this, "Nothing to undo", Toast.LENGTH_SHORT).show();
-            } else { // TODO: test
+            } else { // TestMe
                 Pair<Integer, Integer> move = moveHistory.pop();
                 int n = sudoku.getGrid()[move.first][move.second];
 
@@ -260,11 +308,12 @@ public class ActivityPlay extends AppCompatActivity {
             }
         });
 
+        // DocMe
         btnErase = findViewById(R.id.erase);
         layoutErase = findViewById(R.id.layoutErase);
         btnErase.setOnClickListener(v -> {
-            if (cellSelected) {
-                // TODO
+            if (cellSelected != 0) {
+                // PENDING
             } else {
                 resetCellBackground();
 
@@ -293,6 +342,7 @@ public class ActivityPlay extends AppCompatActivity {
             }
         });
 
+        // DocMe
         btnPencil = findViewById(R.id.pencil);
         layoutPencil = findViewById(R.id.layoutPencil);
         btnPencil.setOnClickListener(v -> {
@@ -324,11 +374,12 @@ public class ActivityPlay extends AppCompatActivity {
             layoutPencil.setLayoutParams(params);
         });
 
+        // DocMe
         btnHint = findViewById(R.id.hint);
         layoutHint = findViewById(R.id.layoutHint);
         btnHint.setOnClickListener(v -> {
-            if (cellSelected) {
-                // TODO
+            if (cellSelected != 0) {
+                // PENDING
             } else {
                 resetCellBackground();
 
@@ -359,6 +410,8 @@ public class ActivityPlay extends AppCompatActivity {
     }
 
     public Spanned styleBtnText(int num, int count) {
+        // DocMe
+
         String html = "<h1><big><font color='#4F1964'>" +
                 String.valueOf(num) +
                 "</font></big><br/><small><font color='#4F1964'>" +
@@ -369,55 +422,86 @@ public class ActivityPlay extends AppCompatActivity {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public void selectCell(int row, int col) {
+        // DocMe
+
         resetCellBackground();
 
-        if (playable[row][col]) {
-            // TODO
-            Toast.makeText(this, "voila", Toast.LENGTH_SHORT).show();
-        } else {
+        if (cellSelected == 10*row + col + 1) {return;} // un-choosing the cell
+
+        int n = 0;
+
+        if (marking) {
+            // PENDING
+            // SomethingStrange
+        }
+
+        n = sudoku.getGrid()[row][col] - 1;
+
+        // highlighting cells
+        if (n != -1) {
             // highlight same number
-            int n = sudoku.getGrid()[row][col] - 1;
             int index = 0;
             while (index < 9 && numberPositions[n][index] != 0) {
-                int i = (numberPositions[n][index] - 1)/10;
-                int j = (numberPositions[n][index] - 1)%10;
+                int i = (numberPositions[n][index] - 1) / 10;
+                int j = (numberPositions[n][index] - 1) % 10;
                 btnCells[i][j].setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
                 index++;
             }
 
-            // find and highlight 'neighbours'
-            // row and column
-            for (int i = 0; i < 9; i++) {
-                // same row
-                if (playable[row][i]) {
-                    btnCells[row][i].setBackground(getDrawable(R.drawable.cell_play_highlight));}
-                else {
-                    btnCells[row][i].setBackground(getDrawable(R.drawable.cell_set_highlight));}
-                // same column
-                if (playable[i][col]) {
-                    btnCells[i][col].setBackground(getDrawable(R.drawable.cell_play_highlight));}
-                else {
-                    btnCells[i][col].setBackground(getDrawable(R.drawable.cell_set_highlight));}
-            }
-            // 3x3 box
-            int startRow = row/3*3; // determine block's lowest row index
-            int startCol = col/3*3; // determine block's lowest col index
-            for (int i = startRow; i < startRow + 3; i++) {
-                for (int j = startCol; j < startCol + 3; j++) {
-                    if (playable[i][j]) {
-                        btnCells[i][j].setBackground(getDrawable(R.drawable.cell_play_highlight));}
-                    else {
-                        btnCells[i][j].setBackground(getDrawable(R.drawable.cell_set_highlight));}
+            // highlight marks with the same number
+            for (int x = 0; x < 9; x++) {
+                for (int y = 0; y < 9; y++) {
+                    if (marks[x][y][n]) { // make n bold, the rest normal
+                        String[] numberMarks = {" ", " ", " ", " ", " ", " ", " ", " ", " "};
+                        for (int z = 0; z < 9; z++) {
+                            if (marks[x][y][z]) {numberMarks[z] = String.valueOf(z + 1);}
+                        }
+                        numberMarks[n] = "<b>" + numberMarks[n] + "</b>";
+                        String marks = numberMarks[0] + " " + numberMarks[1] + " " + numberMarks[2] + "\n" +
+                                numberMarks[3] + " " + numberMarks[4] + " " + numberMarks[5] + "\n" +
+                                numberMarks[6] + " " + numberMarks[7] + " " + numberMarks[8];
+
+                    }
                 }
             }
-
-            // highlight the cell itself
-            btnCells[row][col].setBackground(getDrawable(R.drawable.cell_set_chosen));
         }
+
+        // find and highlight 'neighbours'
+        // row and column
+        for (int i = 0; i < 9; i++) {
+            // same row
+            if (playable[row][i]) {
+                btnCells[row][i].setBackground(getDrawable(R.drawable.cell_play_highlight));}
+            else {
+                btnCells[row][i].setBackground(getDrawable(R.drawable.cell_set_highlight));}
+            // same column
+            if (playable[i][col]) {
+                btnCells[i][col].setBackground(getDrawable(R.drawable.cell_play_highlight));}
+            else {
+                btnCells[i][col].setBackground(getDrawable(R.drawable.cell_set_highlight));}
+        }
+        // 3x3 box
+        int startRow = row/3*3; // determine block's lowest row index
+        int startCol = col/3*3; // determine block's lowest col index
+        for (int i = startRow; i < startRow + 3; i++) {
+            for (int j = startCol; j < startCol + 3; j++) {
+                if (playable[i][j]) {
+                    btnCells[i][j].setBackground(getDrawable(R.drawable.cell_play_highlight));}
+                else {
+                    btnCells[i][j].setBackground(getDrawable(R.drawable.cell_set_highlight));}
+            }
+        }
+
+        // highlight the cell itself
+        btnCells[row][col].setBackground(getDrawable(R.drawable.cell_set_chosen));
+
+        cellSelected = 10*row + col + 1;
     }
+
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public void resetCellBackground() {
+        // DocME
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 boolean purpleCondition = i < 3 && (j < 3 || j > 5) ||
@@ -442,6 +526,8 @@ public class ActivityPlay extends AppCompatActivity {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public void check() {
+        // DocMe
+        // PENDING
         // TODO: check for mistakes and highlight wring answers
 
         // adjust hearts
@@ -456,12 +542,15 @@ public class ActivityPlay extends AppCompatActivity {
     }
 
     public void gameOver() {
+        // DocMe
+        // PENDING
         // TODO: popup about the game
 
         Toast.makeText(this, "Game Over", Toast.LENGTH_SHORT).show();
     }
 
     public void setCells() {
+        // DocMe
         // block 1
         btnCells[0][0] = findViewById(R.id.cell11);
         btnCells[0][1] = findViewById(R.id.cell12);
