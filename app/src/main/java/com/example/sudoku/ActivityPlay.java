@@ -1,6 +1,7 @@
 package com.example.sudoku;
 
 import android.annotation.SuppressLint;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Html;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Stack;
@@ -69,10 +71,11 @@ public class ActivityPlay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
 
-        // TODO:
-        // create new Sudoku object if making a puzzle
-        // retrieve needed Sudoku object if solving a puzzle
-        // set number of hints
+        // TODO : create new Sudoku object if making a puzzle
+
+        // TODO : retrieve needed Sudoku object if solving a puzzle
+
+        // TODO : set number of hints
 
         // set codePoints for bold marks
         boldMarkCodes.put(1, 120813);
