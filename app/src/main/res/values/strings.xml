@@ -4,4 +4,25 @@
     <string name="erase">erase</string>
     <string name="pencil">pencil</string>
     <string name="hint">hint</string>
+    <string name="create">Create</string>
+    <string name="random">Random</string>
+    <string name="generated">generated</string>
+    <string name="self_made">self-made</string>
+    <string name="_76_99_done">76-99% done</string>
+    <string name="_51_75_done">51-75% done</string>
+    <string name="_26_50_done">26-50% done</string>
+    <string name="_1_25_done">1-25% done</string>
+    <string name="_51_81_unknowns">51-81 unknowns</string>
+    <string name="_31_50_unknowns">31-50 unknowns</string>
+    <string name="_11_30_unknowns">11-30 unknowns</string>
+    <string name="_1_10_unknowns">1-10 unknowns</string>
+    <string name="unsolved">unsolved</string>
+    <string name="started">started</string>
+    <string name="completed">completed</string>
+    <string name="name_a_z">Name (A-Z)</string>
+    <string name="name_z_a">Name (Z-A)</string>
+    <string name="done_desc">% done (desc)</string>
+    <string name="done_asc">% done (asc)</string>
+    <string name="unknowns_desc">Unknowns (desc)</string>
+    <string name="unknowns_asc">Unknowns (asc)</string>
 </resources>
