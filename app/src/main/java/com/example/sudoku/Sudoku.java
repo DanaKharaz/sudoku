@@ -10,6 +10,10 @@ public class Sudoku {
 
     // vars
     private int[][] grid;
+    private String name;
+    private int done;
+    private int unknown;
+    private int hints;
 
     // constructors
     public Sudoku(int known) {
@@ -50,6 +54,10 @@ public class Sudoku {
 
     // methods
     public int[][] getGrid() {return grid;}
+    public String getName() {return name;}
+    public int getDone() {return done;}
+    public int getUnknown() {return unknown;}
+    public int getHints() {return hints;}
 
     public void putValue(int row, int col, int val) {grid[row][col] = val;}
     public void removeValue(int row, int col) {grid[row][col] = 0;}

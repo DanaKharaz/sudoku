@@ -143,6 +143,6 @@ public class ActivityChoosePuzzle extends AppCompatActivity {
             Toast.makeText(this, "nothing :(", Toast.LENGTH_SHORT).show();
         }
 
-        // TODO : display the sudokus in a recyclerview (unknowns, mark count, num count)
+        // TODO : display in a recyclerview (unknowns, mark count, num count)
     }
 }

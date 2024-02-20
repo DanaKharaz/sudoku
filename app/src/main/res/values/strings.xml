@@ -25,4 +25,8 @@
     <string name="done_asc">% done (asc)</string>
     <string name="unknowns_desc">Unknowns (desc)</string>
     <string name="unknowns_asc">Unknowns (asc)</string>
+    <string name="unknowns">Unknowns:</string>
+    <string name="hints_left">Hints left:</string>
+    <string name="sudoku_number">Sudoku #</string>
+    <string name="percent">%</string>
 </resources>

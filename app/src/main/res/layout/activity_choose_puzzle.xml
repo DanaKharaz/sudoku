@@ -7,7 +7,6 @@
     android:background="@color/purple_mid"
     tools:context=".ActivityChoosePuzzle">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPuzzles"
         android:layout_width="360dp"
@@ -16,7 +15,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnCreate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSort" />
+        app:layout_constraintTop_toBottomOf="@id/svFind" />
 
     <Button
         android:id="@+id/btnCreate"
@@ -62,160 +61,160 @@
         android:layout_marginEnd="10dp"
         android:background="@drawable/ic_filter"
         android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toStartOf="@+id/btnSort"
-        app:layout_constraintTop_toTopOf="@id/btnSort"
-        android:focusable="true" />
+        app:layout_constraintTop_toTopOf="@id/btnSort" />
 
     <TextView
         android:id="@+id/btnSort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_sort"
         android:layout_marginTop="10dp"
+        android:background="@drawable/ic_sort"
         android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="@id/rvPuzzles"
-        app:layout_constraintTop_toTopOf="parent"
-        android:focusable="true" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/menuFilter"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@color/purple_dark"
+        android:orientation="vertical"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/btnFilter"
-        app:layout_constraintTop_toBottomOf="@+id/btnFilter" >
+        app:layout_constraintTop_toBottomOf="@+id/btnFilter">
 
         <CheckBox
             android:id="@+id/chkCompleted"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:buttonTint="@color/purple_light"
-            android:textColor="@color/purple_light"
-            android:textSize="12sp"
             android:checked="true"
-            android:text="@string/completed"/>
+            android:text="@string/completed"
+            android:textColor="@color/purple_light"
+            android:textSize="12sp" />
 
         <CheckBox
             android:id="@+id/chkStarted"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:buttonTint="@color/purple_light"
-            android:textColor="@color/purple_light"
-            android:textSize="12sp"
             android:checked="true"
-            android:text="@string/started"/>
+            android:text="@string/started"
+            android:textColor="@color/purple_light"
+            android:textSize="12sp" />
 
         <CheckBox
             android:id="@+id/chkUnsolved"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:buttonTint="@color/purple_light"
-            android:textColor="@color/purple_light"
-            android:textSize="12sp"
             android:checked="true"
-            android:text="@string/unsolved"/>
+            android:text="@string/unsolved"
+            android:textColor="@color/purple_light"
+            android:textSize="12sp" />
 
         <CheckBox
             android:id="@+id/chkUnknown1to10"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:buttonTint="@color/purple_light"
-            android:textColor="@color/purple_light"
-            android:textSize="12sp"
             android:checked="true"
-            android:text="@string/_1_10_unknowns"/>
+            android:text="@string/_1_10_unknowns"
+            android:textColor="@color/purple_light"
+            android:textSize="12sp" />
 
         <CheckBox
             android:id="@+id/chkUnknown11to30"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:buttonTint="@color/purple_light"
-            android:textColor="@color/purple_light"
-            android:textSize="12sp"
             android:checked="true"
-            android:text="@string/_11_30_unknowns"/>
+            android:text="@string/_11_30_unknowns"
+            android:textColor="@color/purple_light"
+            android:textSize="12sp" />
 
         <CheckBox
             android:id="@+id/chkUnknown31to50"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:buttonTint="@color/purple_light"
-            android:textColor="@color/purple_light"
-            android:textSize="12sp"
             android:checked="true"
-            android:text="@string/_31_50_unknowns"/>
+            android:text="@string/_31_50_unknowns"
+            android:textColor="@color/purple_light"
+            android:textSize="12sp" />
 
         <CheckBox
             android:id="@+id/chkUnknown51to81"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:buttonTint="@color/purple_light"
-            android:textColor="@color/purple_light"
-            android:textSize="12sp"
             android:checked="true"
-            android:text="@string/_51_81_unknowns"/>
+            android:text="@string/_51_81_unknowns"
+            android:textColor="@color/purple_light"
+            android:textSize="12sp" />
 
         <CheckBox
             android:id="@+id/chkDone1to25"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:buttonTint="@color/purple_light"
-            android:textColor="@color/purple_light"
-            android:textSize="12sp"
             android:checked="true"
-            android:text="@string/_1_25_done"/>
+            android:text="@string/_1_25_done"
+            android:textColor="@color/purple_light"
+            android:textSize="12sp" />
 
         <CheckBox
             android:id="@+id/chkDone26to50"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:buttonTint="@color/purple_light"
-            android:textColor="@color/purple_light"
-            android:textSize="12sp"
             android:checked="true"
-            android:text="@string/_26_50_done"/>
+            android:text="@string/_26_50_done"
+            android:textColor="@color/purple_light"
+            android:textSize="12sp" />
 
         <CheckBox
             android:id="@+id/chkDone51to75"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:buttonTint="@color/purple_light"
-            android:textColor="@color/purple_light"
-            android:textSize="12sp"
             android:checked="true"
-            android:text="@string/_51_75_done"/>
+            android:text="@string/_51_75_done"
+            android:textColor="@color/purple_light"
+            android:textSize="12sp" />
 
         <CheckBox
             android:id="@+id/chkDone76to99"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:buttonTint="@color/purple_light"
-            android:textColor="@color/purple_light"
-            android:textSize="12sp"
             android:checked="true"
-            android:text="@string/_76_99_done"/>
+            android:text="@string/_76_99_done"
+            android:textColor="@color/purple_light"
+            android:textSize="12sp" />
 
         <CheckBox
             android:id="@+id/chkSelfMade"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:buttonTint="@color/purple_light"
-            android:textColor="@color/purple_light"
-            android:textSize="12sp"
             android:checked="true"
-            android:text="@string/self_made"/>
+            android:text="@string/self_made"
+            android:textColor="@color/purple_light"
+            android:textSize="12sp" />
 
         <CheckBox
             android:id="@+id/chkGenerated"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:buttonTint="@color/purple_light"
-            android:textColor="@color/purple_light"
-            android:textSize="12sp"
             android:checked="true"
-            android:text="@string/generated"/>
+            android:text="@string/generated"
+            android:textColor="@color/purple_light"
+            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -223,11 +222,11 @@
         android:id="@+id/menuSort"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@color/purple_dark"
+        android:orientation="vertical"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/btnSort"
-        app:layout_constraintTop_toBottomOf="@+id/btnSort" >
+        app:layout_constraintTop_toBottomOf="@+id/btnSort">
 
         <TextView
             android:id="@+id/sortNameAsc"
@@ -235,12 +234,12 @@
             android:layout_height="20dp"
             android:clickable="true"
             android:focusable="true"
-            android:gravity="center"
             android:fontFamily="monospace"
-            android:textSize="12sp"
-            android:textStyle="bold"
+            android:gravity="center"
+            android:text="@string/name_a_z"
             android:textColor="@color/purple_mid"
-            android:text="@string/name_a_z"/>
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/sortNameDesc"
@@ -248,11 +247,11 @@
             android:layout_height="20dp"
             android:clickable="true"
             android:focusable="true"
-            android:gravity="center"
             android:fontFamily="monospace"
-            android:textSize="12sp"
+            android:gravity="center"
+            android:text="@string/name_z_a"
             android:textColor="@color/purple_light"
-            android:text="@string/name_z_a"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/sortDoneDesc"
@@ -260,11 +259,11 @@
             android:layout_height="20dp"
             android:clickable="true"
             android:focusable="true"
-            android:gravity="center"
             android:fontFamily="monospace"
-            android:textSize="12sp"
+            android:gravity="center"
+            android:text="@string/done_desc"
             android:textColor="@color/purple_light"
-            android:text="@string/done_desc"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/sortDoneAsc"
@@ -272,11 +271,11 @@
             android:layout_height="20dp"
             android:clickable="true"
             android:focusable="true"
-            android:gravity="center"
             android:fontFamily="monospace"
-            android:textSize="12sp"
+            android:gravity="center"
+            android:text="@string/done_asc"
             android:textColor="@color/purple_light"
-            android:text="@string/done_asc"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/sortUnknownDesc"
@@ -284,11 +283,11 @@
             android:layout_height="20dp"
             android:clickable="true"
             android:focusable="true"
-            android:gravity="center"
             android:fontFamily="monospace"
-            android:textSize="12sp"
+            android:gravity="center"
+            android:text="@string/unknowns_desc"
             android:textColor="@color/purple_light"
-            android:text="@string/unknowns_desc"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/sortUnknownAsc"
@@ -296,12 +295,24 @@
             android:layout_height="20dp"
             android:clickable="true"
             android:focusable="true"
-            android:gravity="center"
             android:fontFamily="monospace"
-            android:textSize="12sp"
+            android:gravity="center"
+            android:text="@string/unknowns_asc"
             android:textColor="@color/purple_light"
-            android:text="@string/unknowns_asc" />
+            android:textSize="12sp" />
 
     </LinearLayout>
+
+    <SearchView
+        android:id="@+id/svFind"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:searchHintIcon="@drawable/ic_search"
+        android:searchIcon="@drawable/ic_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSort" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
